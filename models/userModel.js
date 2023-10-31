@@ -47,6 +47,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [false, 'Please add the image '],
     },
+    isConfirmed:{
+        type: Boolean,
+        default: false,
+    }
 }, {
     timestamps: true
 });
