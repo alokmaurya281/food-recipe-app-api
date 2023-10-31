@@ -1,16 +1,10 @@
 const express = require("express");
 
 const router = express.Router();
-const {
-    sendOtp
-  } = require("../controllers/otpController");
-const validateToken = require("../middleware/validateTokenHandler");
+
+const { sendOTP } = require("../controllers/otpController");
   
 
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
-router.route("/profile").get(validateToken, currentUser);
-
-
+router.route("/send").post(sendOTP);
 
 module.exports = router;
