@@ -87,8 +87,6 @@ const verifyOTP = asyncHandler(async (req, res)=>{
     res.status(400);
     throw new Error("user not availbale !");
   }
-
-
 });
 
 module.exports = {

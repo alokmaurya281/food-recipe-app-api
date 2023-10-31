@@ -162,6 +162,37 @@ const forgotPass =  asyncHandler(async (req, res)=>{
 });
 
 
+const accountVerify = asyncHandler(async (req, res)=>{
+    const {otp, email} = req.body;
+    if (!otp && !email) {
+      res.status(400);
+      throw new Error("All Fields are required!");
+    } 
+    const user = await User.findOne({email});
+    const prevOtp = user.otp;
+    if (user) {
+        if(prevOtp == otp){
+        await User.findOneAndUpdate(
+          {email},
+          {otp: ''},
+        ); 
+        res.status(200).json({
+          
+          message: 'OTP verified Successfully'
+        })
+      }
+      else{
+        res.status(400);
+        throw new Error("Invaild otp!");
+      }
+    }
+    else{
+      res.status(400);
+      throw new Error("user not availbale !");
+    }
+  });
+
+
 // get current user
 // route get /api/v1/user/profile
 //access private
@@ -175,5 +206,6 @@ module.exports = {
   loginUser,
   currentUser,
   resetPass,
-  forgotPass
+  forgotPass,
+  accountVerify,
 };

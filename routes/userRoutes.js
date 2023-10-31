@@ -7,6 +7,7 @@ const {
     currentUser,
     resetPass,
     forgotPass,
+    accountVerify
   } = require("../controllers/userController");
 const validateToken = require("../middleware/validateTokenHandler");
   
@@ -15,6 +16,8 @@ router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/resetpass").post(resetPass);
 router.route("/forgotpass").post(forgotPass);
+router.route("/accountverify").post(accountVerify);
+
 router.route("/profile").get(validateToken, currentUser);
 
 
