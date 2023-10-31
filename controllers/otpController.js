@@ -71,8 +71,7 @@ const verifyOTP = asyncHandler(async (req, res)=>{
       if(prevOtp == otp){
       await User.findOneAndUpdate(
         {email},
-        {otp: ''},
-        {isConfirmed: true}
+        {otp: '',isConfirmed: true},
       ); 
       res.status(200).json({
         
