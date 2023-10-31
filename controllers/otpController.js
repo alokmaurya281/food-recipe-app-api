@@ -44,13 +44,20 @@ const sendOTP = asyncHandler(async (req, res)=>{
     {email},
     {otp: OTP}
     );
-    res.status(201).json({
-      data: {otp : OTP},
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        throw new Error(error);
+      }
+      res.status(201).json({
+      data: { otp: OTP },
       message: 'OTP sent Successfully'
-    })
-  }
-
+    });
+  
+  });
+}
 });
+
+  
 
 const verifyOTP = asyncHandler(async (req, res)=>{
   const {otp, email} = req.body;
@@ -67,7 +74,7 @@ const verifyOTP = asyncHandler(async (req, res)=>{
         {otp: ''},
         {isConfirmed: true}
       ); 
-      res.status(201).json({
+      res.status(200).json({
         
         message: 'OTP verified Successfully'
       })
