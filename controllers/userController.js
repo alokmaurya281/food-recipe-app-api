@@ -211,51 +211,47 @@ const userProfileByEmail = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("user not availbale !");
   }
-  res
-    .status(200)
-    .json({
-      data: {
-        _id: userData.id,
-        email: userData.email,
-        username: userData.username,
-        name: userData.name,
-        about: userData.about,
-        city: userData.city,
-        state: userData.state,
-        country: userData.country,
-        image: userData.image,
-        mobile: userData.mobile,
-        address: userData.address,
-        isConfirmed: userData.isConfirmed,
-        socialId: userData.socialId,
-        isFacebookSignin: userData.isFacebookSignin,
-        isGoogleSignin: userData.isGoogleSignin,
-        socialLogin: userData.socialLogin,
-      },
-    });
+  res.status(200).json({
+    data: {
+      _id: userData.id,
+      email: userData.email,
+      username: userData.username,
+      name: userData.name,
+      about: userData.about,
+      city: userData.city,
+      state: userData.state,
+      country: userData.country,
+      image: userData.image,
+      mobile: userData.mobile,
+      address: userData.address,
+      isConfirmed: userData.isConfirmed,
+      socialId: userData.socialId,
+      isFacebookSignin: userData.isFacebookSignin,
+      isGoogleSignin: userData.isGoogleSignin,
+      socialLogin: userData.socialLogin,
+    },
+  });
 });
-
 
 //update user profile
 //private
 // route api/v1/user/updateprofile
 
 const updateProfile = asyncHandler(async (req, res) => {
-    const {id,name,address, about, city, state, country, mobile} = req.body;
-    const userData = await User.findOne({ _id: req.body.id });
-    if (!userData) {
-      res.status(400);
-      throw new Error("user not availbale !");
-    }
-    await User.findOneAndUpdate({ _id : req.body.id }, { name, address,city,country,about,state,mobile });
-      res.status(200).json({
-        message: "Profile Updated SuccessFully",
-      });
-    
+  const { id, name, address, about, city, state, country, mobile } = req.body;
+  const userData = await User.findOne({ _id: req.body.id });
+  if (!userData) {
+    res.status(400);
+    throw new Error("user not availbale !");
+  }
+  await User.findOneAndUpdate(
+    { _id: req.body.id },
+    { name, address, city, country, about, state, mobile }
+  );
+  res.status(200).json({
+    message: "Profile Updated SuccessFully",
   });
-  
-
-
+});
 
 // social signin
 // route post /api/v1/user/social-signin
@@ -295,10 +291,10 @@ const socialSignin = asyncHandler(async (req, res) => {
       const accessToken = jwt.sign(
         {
           user: {
-            username: user.username,
-            email: user.email,
-            name: user.name,
-            _id: user.id,
+            username: createUser.username,
+            email: createUser.email,
+            name: createUser.name,
+            _id: createUser.id,
           },
         },
         process.env.JWT_SECRET_KEY,
