@@ -8,7 +8,8 @@ const {
     resetPass,
     forgotPass,
     accountVerify,
-    socialSignin
+    socialSignin,
+    userProfileByEmail,
   } = require("../controllers/userController");
 const validateToken = require("../middleware/validateTokenHandler");
   
@@ -20,6 +21,7 @@ router.route("/forgotpass").post(forgotPass);
 router.route("/accountverify").post(accountVerify);
 router.route("/social-signin").post(socialSignin);
 router.route("/profile").get(validateToken, currentUser);
+router.route("/profile-by-email").get(validateToken, userProfileByEmail);
 
 
 

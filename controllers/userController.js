@@ -201,6 +201,40 @@ const currentUser = asyncHandler(async (req, res) => {
   res.status(200).json({ data: req.user });
 });
 
+// user profile by email
+// private
+// route api/v1/user/profile-by-email
+
+const userProfileByEmail = asyncHandler(async (req, res) => {
+  const userData = await User.findOne({ email: req.user.email });
+  if (!userData) {
+    res.status(400);
+    throw new Error("user not availbale !");
+  }
+  res
+    .status(200)
+    .json({
+      data: {
+        _id: userData.id,
+        email: userData.email,
+        username: userData.username,
+        name: userData.name,
+        about: userData.about,
+        city: userData.city,
+        state: userData.state,
+        country: userData.country,
+        image: userData.image,
+        mobile: userData.mobile,
+        address: userData.address,
+        isConfirmed: userData.isConfirmed,
+        socialId: userData.socialId,
+        isFacebookSignin: userData.isFacebookSignin,
+        isGoogleSignin: userData.isGoogleSignin,
+        socialLogin: userData.socialLogin,
+      },
+    });
+});
+
 // social signin
 // route post /api/v1/user/social-signin
 // access public
@@ -221,7 +255,7 @@ const socialSignin = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findOne({ email });
-  const hashedPass = await bcrypt.hash('123456', 10);
+  const hashedPass = await bcrypt.hash("123456", 10);
 
   if (!user) {
     const createUser = await User.create({
@@ -234,8 +268,6 @@ const socialSignin = asyncHandler(async (req, res) => {
       socialLogin: true,
       isConfirmed: true,
       password: hashedPass,
-
-
     });
     if (createUser) {
       const accessToken = jwt.sign(
@@ -298,4 +330,5 @@ module.exports = {
   forgotPass,
   accountVerify,
   socialSignin,
+  userProfileByEmail,
 };

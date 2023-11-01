@@ -59,6 +59,7 @@ const userSchema = mongoose.Schema({
     },
     socialLogin:{
         type:Boolean,
+        default:false,
     },
     isGoogleSignin:{
         type:Boolean,
