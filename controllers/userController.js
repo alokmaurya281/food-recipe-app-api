@@ -118,8 +118,7 @@ const resetPass = asyncHandler(async (req, res) => {
     res.status(200).json({
       message: "Password Updated SuccessFully",
     });
-  }
-  else{
+  } else {
     res.status(400);
     throw new Error("User is Invalid !");
   }
@@ -202,6 +201,95 @@ const currentUser = asyncHandler(async (req, res) => {
   res.status(200).json({ data: req.user });
 });
 
+// social signin
+// route post /api/v1/user/social-signin
+// access public
+
+const socialSignin = asyncHandler(async (req, res) => {
+  const { type, email, name, socialId } = req.body;
+  if (!type && !email && !name && !socialId) {
+    res.status(400);
+    throw new Error("All Fields Required !");
+  }
+  let isGoogleSignIn = false;
+  let isFacebookSignin = false;
+
+  if (type == "Google") {
+    isGoogleSignIn = true;
+  } else {
+    isFacebookSignin = true;
+  }
+
+  const user = await User.findOne({ email });
+  const hashedPass = await bcrypt.hash('123456', 10);
+
+  if (!user) {
+    const createUser = await User.create({
+      username: email,
+      name: name,
+      email: email,
+      isGoogleSignin: isGoogleSignIn,
+      isFacebookSignin: isFacebookSignin,
+      socialId: socialId,
+      socialLogin: true,
+      isConfirmed: true,
+      password: hashedPass,
+
+
+    });
+    if (createUser) {
+      const accessToken = jwt.sign(
+        {
+          user: {
+            username: user.username,
+            email: user.email,
+            name: user.name,
+            _id: user.id,
+          },
+        },
+        process.env.JWT_SECRET_KEY,
+        { expiresIn: "60 days" }
+      );
+      res.status(200).json({
+        data: {
+          accessToken: accessToken,
+        },
+        message: "Signed In Successfully",
+      });
+    } else {
+      res.status(400);
+      throw new Error("User data is not valid!");
+    }
+  } else {
+    await User.findOneAndUpdate(
+      { email },
+      {
+        socialId: socialId,
+        isFacebookSignin: isFacebookSignin,
+        isGoogleSignin: isGoogleSignIn,
+        socialLogin: true,
+        isConfirmed: true,
+      }
+    );
+    const accessToken = jwt.sign(
+      {
+        user: {
+          username: user.username,
+          email: user.email,
+          name: user.name,
+          _id: user.id,
+        },
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "60 days" }
+    );
+    res.status(200).json({
+      data: { accessToken: accessToken },
+      message: "Signed In Successfully",
+    });
+  }
+});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -209,4 +297,5 @@ module.exports = {
   resetPass,
   forgotPass,
   accountVerify,
+  socialSignin,
 };

@@ -53,7 +53,22 @@ const userSchema = mongoose.Schema({
     },
     otp:{
         type: String,
+    },
+    socialId:{
+        type:String,
+    },
+    socialLogin:{
+        type:Boolean,
+    },
+    isGoogleSignin:{
+        type:Boolean,
+        default:false,
+    },
+    isFacebookSignin:{
+        type:Boolean,
+        default:false,
     }
+
 }, {
     timestamps: true
 });
