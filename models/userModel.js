@@ -22,30 +22,43 @@ const userSchema = mongoose.Schema({
     about:{
         type: String,
         required: [false, 'Please add the biography '],
+        default: ""
     },
     city:{
         type: String,
         required: [false, 'Please add the city '],
+        default: ""
+
     },
     state:{
         type: String,
         required: [false, 'Please add the state '],
+        default: ""
+
     },
     country:{
         type: String,
         required: [false, 'Please add the country '],
+        default: ""
+
     },
     mobile:{
         type: String,
         required: [false, 'Please add the mobile '],
+        default: ""
+
     },
     address:{
         type: String,
         required: [false, 'Please add the full address '],
+        default: ""
+
     },
     image:{
         type: String,
         required: [false, 'Please add the image '],
+        default: ""
+
     },
     isConfirmed:{
         type: Boolean,
@@ -53,9 +66,13 @@ const userSchema = mongoose.Schema({
     },
     otp:{
         type: String,
+        default: ""
+
     },
     socialId:{
         type:String,
+        default: ""
+
     },
     socialLogin:{
         type:Boolean,
