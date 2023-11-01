@@ -235,6 +235,28 @@ const userProfileByEmail = asyncHandler(async (req, res) => {
     });
 });
 
+
+//update user profile
+//private
+// route api/v1/user/updateprofile
+
+const updateProfile = asyncHandler(async (req, res) => {
+    const {id,name,address, about, city, state, country, mobile} = req.body;
+    const userData = await User.findOne({ _id: req.body.id });
+    if (!userData) {
+      res.status(400);
+      throw new Error("user not availbale !");
+    }
+    await User.findOneAndUpdate({ _id : req.body.id }, { name, address,city,country,about,state,mobile });
+      res.status(200).json({
+        message: "Profile Updated SuccessFully",
+      });
+    
+  });
+  
+
+
+
 // social signin
 // route post /api/v1/user/social-signin
 // access public
@@ -331,4 +353,5 @@ module.exports = {
   accountVerify,
   socialSignin,
   userProfileByEmail,
+  updateProfile,
 };

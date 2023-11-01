@@ -10,6 +10,7 @@ const {
     accountVerify,
     socialSignin,
     userProfileByEmail,
+    updateProfile
   } = require("../controllers/userController");
 const validateToken = require("../middleware/validateTokenHandler");
   
@@ -22,6 +23,8 @@ router.route("/accountverify").post(accountVerify);
 router.route("/social-signin").post(socialSignin);
 router.route("/profile").get(validateToken, currentUser);
 router.route("/profile-by-email").get(validateToken, userProfileByEmail);
+router.route("/updateprofile").put(validateToken, updateProfile);
+
 
 
 
