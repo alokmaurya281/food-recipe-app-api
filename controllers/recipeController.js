@@ -42,6 +42,7 @@ const getRecipeInfo = asyncHandler(async (req, res) => {
       
       data: {
         id: response.data.id,
+        vegeterian: response.data.vegeterian,
         title: response.data.title,
         readyInMinutes: response.data.readyInMinutes,
         servings: response.data.servings,
