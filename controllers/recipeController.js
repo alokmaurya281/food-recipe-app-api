@@ -39,7 +39,6 @@ const getRecipeInfo = asyncHandler(async (req, res) => {
   // const data = response.data;
   if (response.status == 200) {
     res.status(response.status).json({
-      
       data: {
         id: response.data.id,
         vegeterian: response.data.vegeterian,
@@ -88,8 +87,48 @@ const getSimilarRecipes = asyncHandler(async (req, res) => {
   }
 });
 
+// get random recipes
+// api/v1/recipes/random
+// access private
+
+const getRandomRecipes = asyncHandler(async (req, res) => {
+  const number = req.params.number;
+  const apiKey = process.env.SPOONACULAR_API;
+  const url = `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${number}`;
+  const response = await axios.get(url);
+  const fData = response.data.recipes;
+  let element = [];
+  for (let index = 0; index < fData.length; index++) {
+    let newele = 
+      {
+        id: response.data.recipes[index].id,
+        vegeterian: response.data.recipes[index].vegeterian,
+        title: response.data.recipes[index].title,
+        readyInMinutes: response.data.recipes[index].readyInMinutes,
+        servings: response.data.recipes[index].servings,
+        sourceUrl: response.data.recipes[index].sourceUrl,
+        image: response.data.recipes[index].image,
+        imageType: response.data.recipes[index].imageType,
+        dishTypes: response.data.recipes[index].dishTypes,
+      };
+      element.push(newele);
+  }
+  if (response.status == 200) {
+    res.status(response.status).json({
+      data: { element },
+      status: true,
+    });
+  } else {
+    res.status(response.status).json({
+      error: response.data,
+      status: false,
+    });
+  }
+});
+
 module.exports = {
   searchRecipes,
   getRecipeInfo,
   getSimilarRecipes,
+  getRandomRecipes,
 };
