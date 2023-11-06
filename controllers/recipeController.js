@@ -72,7 +72,7 @@ const getRecipeInfo = asyncHandler(async (req, res) => {
 const getSimilarRecipes = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const apiKey = process.env.SPOONACULAR_API;
-  const url = `https://api.spoonacular.com/recipes/${id}/similar?number=10&false&apiKey=${apiKey}`;
+  const url = `https://api.spoonacular.com/recipes/${id}/similar?number=5&false&apiKey=${apiKey}`;
   const response = await axios.get(url);
   if (response.status == 200) {
     res.status(response.status).json({

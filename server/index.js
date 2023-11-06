@@ -23,6 +23,11 @@ app.use(express.json());
 app.use("/api/v1/user", require("../routes/userRoutes"));
 app.use("/api/v1/otp", require("../routes/otpRoutes"));
 app.use("/api/v1/recipes", require("../routes/recipeRoutes"));
+app.use("/api/v1/report", require("../routes/reportRoutes"));
+app.use("/api/v1/suggestfeature", require("../routes/suggestFeatureRoutes"));
+app.use("/api/v1/support", require("../routes/supportRoutes"));
+
+
 
 
 
