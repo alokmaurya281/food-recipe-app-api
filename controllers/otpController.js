@@ -12,13 +12,13 @@ const OTP = otpGenerator.generate(4, { upperCaseAlphabets: false, specialChars: 
 
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
   // secure: true,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "snmaurya10275@gmail.com",
-    pass: "VXUDmHkQYA2Gqjgx",
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
 
@@ -31,7 +31,7 @@ const sendOTP = asyncHandler(async (req, res)=>{
     throw new Error("All Fields are required!");
   }  
   const mailOptions = {
-    from: 'snmaurya10275@gmail.com',
+    from: process.env.SMTP_EMAIL,
     to: email, // The recipient's email address
     subject: 'Your OTP Code to Verify email :: Food Recipe App',
     text: `Your OTP code is ${OTP}`

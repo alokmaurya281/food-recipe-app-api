@@ -5,18 +5,18 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const otpGenerator = require("otp-generator");
 
+
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
   // secure: true,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "snmaurya10275@gmail.com",
-    pass: "VXUDmHkQYA2Gqjgx",
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
-
 // Regsiter new user
 // route POST /api/v1/user/register
 //access public

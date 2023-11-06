@@ -2,18 +2,18 @@ const asyncHandler = require("express-async-handler");
 const Report = require("../models/reportModel");
 const nodemailer = require("nodemailer");
 
+
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  // secure: true,
-  auth: {
-    // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "snmaurya10275@gmail.com",
-    pass: "VXUDmHkQYA2Gqjgx",
-  },
-});
-
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    // secure: true,
+    auth: {
+      // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+      user: process.env.SMTP_EMAIL,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
 const sendReport = asyncHandler(async (req, res) => {
   const { name, email, report } = req.body;
   if (!email && !name && !report) {

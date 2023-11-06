@@ -2,15 +2,16 @@ const asyncHandler = require("express-async-handler");
 const Support = require("../models/supportModel");
 const nodemailer = require("nodemailer");
 
+
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
   // secure: true,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "snmaurya10275@gmail.com",
-    pass: "VXUDmHkQYA2Gqjgx",
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
 
