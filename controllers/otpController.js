@@ -12,13 +12,13 @@ const OTP = otpGenerator.generate(4, { upperCaseAlphabets: false, specialChars: 
 
 // Email configuration
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  host: "smtp-relay.brevo.com",
+  port: 587,
   // secure: true,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: process.env.SMTP_EMAIL,
-    pass: process.env.SMTP_PASSWORD,
+    user: "snmaurya10275@gmail.com",
+    pass: "VXUDmHkQYA2Gqjgx",
   },
 });
 
