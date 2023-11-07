@@ -31,7 +31,7 @@ const sendOTP = asyncHandler(async (req, res)=>{
     throw new Error("All Fields are required!");
   }  
   const mailOptions = {
-    from: process.env.SMTP_EMAIL,
+    from: "snmaurya10275@gmail.com",
     to: email, // The recipient's email address
     subject: 'Your OTP Code to Verify email :: Food Recipe App',
     text: `Your OTP code is ${OTP}`
