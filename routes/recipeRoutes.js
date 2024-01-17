@@ -7,10 +7,10 @@ const validateToken = require("../middleware/validateTokenHandler");
 const { searchRecipes , getRecipeInfo,getSimilarRecipes, getRandomRecipes} = require("../controllers/recipeController");
   
 
-router.route("/search/:query").get(validateToken, searchRecipes);
-router.route("/:id/information").get(validateToken, getRecipeInfo);
-router.route("/:id/similar").get(validateToken, getSimilarRecipes);
-router.route("/random/:number").get(validateToken, getRandomRecipes);
+router.route("/recipe/search/:query").get(validateToken, searchRecipes);
+router.route("/recipe/:id/information").get(validateToken, getRecipeInfo);
+router.route("/recipe/:id/similar").get(validateToken, getSimilarRecipes);
+router.route("/recipe/random/:number").get(validateToken, getRandomRecipes);
 
 
 

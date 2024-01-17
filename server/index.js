@@ -2,6 +2,11 @@ const express = require("express");
 const errorHandler = require("../middleware/errorHandler");
 const connectDB = require("../config/dbConnection");
 const dotenv = require("dotenv").config();
+// const { swaggerDocs} = require("../swagger");
+const swaggerFile = require('../swagger_output.json')
+
+const swaggerUi = require("swagger-ui-express");
+
 
 const app = express();
 
@@ -19,22 +24,20 @@ connectDB();
 
 app.use(express.json());
 
-// app.use("/api/v1/contacts", require("../routes/contactRoutes"));
-app.use("/api/v1/user", require("../routes/userRoutes"));
-app.use("/api/v1/otp", require("../routes/otpRoutes"));
-app.use("/api/v1/recipes", require("../routes/recipeRoutes"));
-app.use("/api/v1/report", require("../routes/reportRoutes"));
-app.use("/api/v1/suggestfeature", require("../routes/suggestFeatureRoutes"));
-app.use("/api/v1/support", require("../routes/supportRoutes"));
 
-
+app.use("/api/v1", require("../routes/userRoutes"));
+app.use("/api/v1", require("../routes/otpRoutes"));
+app.use("/api/v1", require("../routes/recipeRoutes"));
+app.use("/api/v1", require("../routes/reportRoutes"));
+app.use("/api/v1", require("../routes/suggestFeatureRoutes"));
+app.use("/api/v1", require("../routes/supportRoutes"));
+app.use('/api_docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 
 
 app.use(errorHandler);
 
-
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}.`);
 });
+// swaggerDocs(app, port);

@@ -6,7 +6,7 @@ const { sendReport} = require("../controllers/reportController");
 const validateToken = require("../middleware/validateTokenHandler");
   
 
-router.route("/send").post(sendReport, validateToken);
+router.route("/report/send").post(sendReport, validateToken);
 
 
 module.exports = router;

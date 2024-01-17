@@ -6,7 +6,7 @@ const { sendSuggestFeatures} = require("../controllers/suggestFeatureController"
 const validateToken = require("../middleware/validateTokenHandler");
   
 
-router.route("/send").post(sendSuggestFeatures, validateToken);
+router.route("/suggestfeature/send").post(sendSuggestFeatures, validateToken);
 
 
 module.exports = router;

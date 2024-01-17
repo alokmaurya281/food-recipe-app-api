@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "swagger-autogen": "node swagger.js"
+
   },
   "author": "Alok Maurya",
   "license": "MIT",
@@ -20,6 +22,11 @@
     "mongoose": "^7.6.4",
     "nodemailer": "^6.9.7",
     "nodemon": "^3.0.1",
-    "otp-generator": "^4.0.1"
+    "otp-generator": "^4.0.1",
+    "swagger-autogen": "^2.23.7"
+  },
+  "devDependencies": {
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   }
 }
