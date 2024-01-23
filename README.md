@@ -55,9 +55,24 @@ To retrieve all recipes, send a GET request to `/api/recipes`.
 
 To retrieve a single recipe, send a GET request to `/api/recipes/:id`, where `:id` is the ID of the recipe.
 
-### Recipe Deletion
+## Error Handling
 
-To delete a recipe, send a DELETE request to `/api/recipes/:id`, where `:id` is the ID of the recipe.
+The app uses the errorHandler middleware to handle errors. The errorHandler middleware logs errors to the console and sends a JSON response to the client with the error message.
+
+## Swagger Documentation
+
+The app uses the swagger-ui-express package to generate Swagger documentation. The Swagger documentation is available at `/api_docs`.
+
+## Running the App
+
+To run the app, run the following command in the project directory:
+
+```
+npm start
+```
+
+The app will listen on port 5001 by default.
+
 
 
 
