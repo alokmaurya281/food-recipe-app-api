@@ -5,10 +5,10 @@
     "title": "Food Recipe REST API",
     "description": ""
   },
-  "host": "food-recipe-app-api.onrender.com",
+  "host": "localhost:5000",
   "basePath": "/api/v1",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/otp/send": {
