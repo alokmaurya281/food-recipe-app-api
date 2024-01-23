@@ -47,18 +47,7 @@ To log in a user, send a POST request to `/api/users/login` with the following J
 }
 ```
 
-### Recipe Creation
 
-To create a new recipe, send a POST request to `/api/recipes` with the following JSON body:
-
-```json
-{
-  "title": "My Favorite Recipe",
-  "description": "This is my favorite recipe.",
-  "ingredients": ["ingredient1", "ingredient2", "ingredient3"],
-  "instructions": ["step1", "step2", "step3"]
-}
-```
 
 ### Recipe Retrieval
 
